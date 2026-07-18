@@ -1,604 +1,999 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Praveenraj M — Senior Frontend Developer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="icon" type="image/png" href="./assets/letter-p.png" />
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0b0e14;
-    --bg-surface:#10141c;
-    --bg-elevated:#161b26;
-    --border:#212836;
-    --text:#e7e9ee;
-    --text-muted:#8891a3;
-    --text-dim:#535c6e;
-    --accent:#7fae8e;
-    --accent-strong:#a3d9b1;
-    --accent-amber:#e8a854;
-    --accent-red:#e8646b;
-    --mono:'JetBrains Mono', ui-monospace, monospace;
-    --sans:'Inter', system-ui, sans-serif;
-    --sidebar-w:260px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--sans);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  ::selection{background:var(--accent);color:#0b0e14;}
-  a{color:inherit;text-decoration:none;}
-  :focus-visible{outline:2px solid var(--accent-strong);outline-offset:2px;}
-
-  /* ---------- Top bar (mobile) ---------- */
-  .topbar{
-    display:none;
-    position:sticky;top:0;z-index:50;
-    background:var(--bg-surface);
-    border-bottom:1px solid var(--border);
-    padding:14px 16px;
-    align-items:center;
-    justify-content:space-between;
-  }
-  .topbar .brand{font-family:var(--mono);font-size:14px;color:var(--accent-strong);}
-  .topbar .toggle{
-    background:none;border:1px solid var(--border);border-radius:6px;
-    color:var(--text-muted);width:36px;height:36px;font-family:var(--mono);cursor:pointer;
-  }
-
-  /* ---------- Layout ---------- */
-  .app{display:flex;min-height:100vh;}
-
-  /* ---------- Sidebar / file tree ---------- */
-  .sidebar{
-    width:var(--sidebar-w);
-    flex-shrink:0;
-    background:var(--bg-surface);
-    border-right:1px solid var(--border);
-    position:sticky;top:0;height:100vh;overflow-y:auto;
-    padding:22px 0 20px;
-  }
-  .sidebar-head{
-    padding:0 20px 18px;
-    border-bottom:1px solid var(--border);
-    margin-bottom:14px;
-  }
-  .sidebar-head .name{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--text);}
-  .sidebar-head .role{font-size:12px;color:var(--text-muted);margin-top:4px;}
-  .tree{list-style:none;padding:0 10px;font-family:var(--mono);font-size:13.5px;}
-  .tree .folder{
-    color:var(--text-dim);
-    padding:6px 10px;
-    letter-spacing:.02em;
-    display:flex;align-items:center;gap:6px;
-    margin-top:10px;
-  }
-  .tree .folder svg{width:13px;height:13px;flex-shrink:0;}
-  .tree .file{
-    display:flex;align-items:center;gap:9px;
-    padding:7px 10px 7px 26px;
-    border-radius:6px;
-    color:var(--text-muted);
-    cursor:pointer;
-    transition:background .15s, color .15s;
-    border-left:2px solid transparent;
-  }
-  .tree .file.indent2{padding-left:38px;}
-  .tree .file:hover{background:var(--bg-elevated);color:var(--text);}
-  .tree .file.active{
-    background:var(--bg-elevated);
-    color:var(--accent-strong);
-    border-left:2px solid var(--accent);
-  }
-  .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-  .dot.green{background:var(--accent);}
-  .dot.amber{background:var(--accent-amber);}
-  .dot.red{background:var(--accent-red);}
-  .dot.blue{background:#6ea8d8;}
-  .sidebar-foot{
-    padding:16px 20px 0;margin-top:16px;border-top:1px solid var(--border);
-    font-family:var(--mono);font-size:11.5px;color:var(--text-dim);
-  }
-
-  /* ---------- Main / editor pane ---------- */
-  .main{flex:1;min-width:0;}
-  .editor-tabs{
-    position:sticky;top:0;z-index:20;
-    background:var(--bg-surface);
-    border-bottom:1px solid var(--border);
-    padding:0 32px;
-    font-family:var(--mono);font-size:12.5px;color:var(--text-dim);
-    height:42px;display:flex;align-items:center;gap:6px;
-    overflow-x:auto;white-space:nowrap;
-  }
-  .editor-tabs .crumb-current{color:var(--accent-strong);}
-  .editor-tabs .sep{color:var(--text-dim);}
-
-  section{padding:70px 40px;max-width:880px;}
-  section.hero{padding-top:80px;padding-bottom:64px;max-width:880px;}
-  h2.section-title{
-    font-family:var(--mono);
-    font-size:13px;
-    letter-spacing:.08em;
-    color:var(--accent);
-    text-transform:uppercase;
-    margin-bottom:28px;
-    display:flex;align-items:center;gap:10px;
-  }
-  h2.section-title::before{content:"//";color:var(--text-dim);}
-
-  /* ---------- Hero ---------- */
-  .hero .eyebrow{
-    font-family:var(--mono);font-size:13px;color:var(--text-dim);margin-bottom:18px;
-  }
-  .hero .eyebrow .prompt{color:var(--accent);}
-  .hero h1{
-    font-family:var(--sans);
-    font-weight:800;
-    font-size:clamp(34px,5vw,56px);
-    line-height:1.08;
-    letter-spacing:-.02em;
-    margin-bottom:16px;
-  }
-  .hero h1 .role{
-    display:block;
-    font-family:var(--mono);
-    font-weight:500;
-    font-size:clamp(16px,2vw,20px);
-    color:var(--accent-strong);
-    margin-top:14px;
-    letter-spacing:0;
-  }
-  .hero .tagline{
-    color:var(--text-muted);
-    font-size:17px;
-    max-width:600px;
-    margin:22px 0 36px;
-  }
-  .hero .meta-row{
-    display:flex;flex-wrap:wrap;gap:10px;margin-bottom:44px;
-  }
-  .pill{
-    font-family:var(--mono);font-size:12px;color:var(--text-muted);
-    border:1px solid var(--border);border-radius:20px;padding:6px 13px;
-    display:inline-flex;align-items:center;gap:7px;
-  }
-  /* ---------- Signature: bundle size compression viz ---------- */
-  .compression-card{
-    background:var(--bg-surface);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:26px 28px 24px;
-    max-width:520px;
-  }
-  .compression-card .label{
-    font-family:var(--mono);font-size:12px;color:var(--text-dim);
-    display:flex;justify-content:space-between;margin-bottom:16px;
-  }
-  .compression-card .label .result{color:var(--accent-strong);font-weight:600;}
-  .bar-track{
-    position:relative;height:34px;background:var(--bg-elevated);
-    border-radius:6px;overflow:hidden;border:1px solid var(--border);
-  }
-  .bar-fill{
-    position:absolute;left:0;top:0;bottom:0;
-    width:100%;
-    background:linear-gradient(90deg, var(--accent-amber), var(--accent));
-    border-radius:6px;
-    transition:width 1.4s cubic-bezier(.16,1,.3,1);
-  }
-  .bar-fill.shrunk{width:25%;}
-  .bar-labels{
-    display:flex;justify-content:space-between;
-    font-family:var(--mono);font-size:11.5px;color:var(--text-dim);margin-top:10px;
-  }
-  .bar-labels span:first-child{color:var(--accent-amber);}
-  .bar-labels span:last-child{color:var(--accent-strong);}
-
-  /* ---------- Skills ---------- */
-  .skills-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:16px;
-  }
-  .skill-card{
-    background:var(--bg-surface);border:1px solid var(--border);
-    border-radius:10px;padding:20px 22px;
-  }
-  .skill-card .key{
-    font-family:var(--mono);font-size:12.5px;color:var(--accent-amber);margin-bottom:12px;padding-top: 10px;
-  }
-  .tag-wrap{display:flex;flex-wrap:wrap;gap:8px;}
-  .tag{
-    font-family:var(--mono);font-size:12px;color:var(--text);
-    background:var(--bg-elevated);border:1px solid var(--border);
-    border-radius:5px;padding:5px 10px;
-  }
-
-  /* ---------- Experience ---------- */
-  .job{
-    border:1px solid var(--border);border-radius:10px;
-    background:var(--bg-surface);
-    margin-bottom:20px;overflow:hidden;
-  }
-  .job-head{
-    padding:20px 24px;border-bottom:1px solid var(--border);
-    display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;
-  }
-  .job-head .title-block .role{font-weight:700;font-size:17px;}
-  .job-head .title-block .company{
-    font-family:var(--mono);font-size:13px;color:var(--accent-strong);margin-top:4px;
-  }
-  .job-head .dates{
-    font-family:var(--mono);font-size:12px;color:var(--text-dim);
-    border:1px solid var(--border);border-radius:20px;padding:4px 11px;white-space:nowrap;
-  }
-  .job-body{padding:18px 24px 22px;}
-  .job-body ul{list-style:none;}
-  .job-body li{
-    position:relative;padding-left:22px;margin-bottom:10px;
-    color:var(--text-muted);font-size:14.5px;
-  }
-  .job-body li::before{
-    content:"//";position:absolute;left:0;color:var(--text-dim);
-    font-family:var(--mono);font-size:13px;
-  }
-  .job-body li strong{color:var(--text);font-weight:600;}
-
-  /* ---------- Achievements ---------- */
-  .log-list{font-family:var(--mono);font-size:14px;}
-  .log-entry{
-    display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);
-    color:var(--text-muted);
-  }
-  .log-entry:last-child{border-bottom:none;}
-  .log-entry .tag{
-    flex-shrink:0;color:var(--accent-amber);background:none;border:none;padding:0;
-    font-size:12px;
-  }
-  .log-entry .msg{color:var(--text);}
-  .log-entry .msg span{color:var(--text-muted);}
-
-  /* ---------- Education ---------- */
-  .edu-card{
-    border:1px solid var(--border);border-radius:10px;background:var(--bg-surface);
-    padding:22px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;
-  }
-  .edu-card .degree{font-weight:700;font-size:16px;}
-  .edu-card .school{color:var(--text-muted);font-size:14px;margin-top:4px;}
-  .edu-card .gpa{
-    font-family:var(--mono);font-size:12px;color:var(--accent-strong);
-    border:1px solid var(--border);border-radius:20px;padding:5px 12px;
-  }
-
-  /* ---------- Contact / terminal ---------- */
-  .terminal{
-    background:#080a0f;border:1px solid var(--border);border-radius:10px;
-    overflow:hidden;
-  }
-  .terminal-bar{
-    background:var(--bg-elevated);padding:10px 16px;display:flex;gap:7px;
-    border-bottom:1px solid var(--border);
-  }
-  .terminal-bar span{width:11px;height:11px;border-radius:50%;display:inline-block;}
-  .terminal-bar span:nth-child(1){background:#e8646b;}
-  .terminal-bar span:nth-child(2){background:#e8a854;}
-  .terminal-bar span:nth-child(3){background:#7fae8e;}
-  .terminal-body{padding:22px 24px 26px;font-family:var(--mono);font-size:13.5px;}
-  .terminal-body .line{margin-bottom:14px;}
-  .terminal-body .prompt{color:var(--accent);}
-  .terminal-body .cmd{color:var(--text);}
-  .terminal-body .out{color:var(--text-muted);margin-left:20px;}
-  .terminal-body a.out{color:var(--accent-strong);cursor:pointer;}
-  .terminal-body a.out:hover{text-decoration:underline;}
-
-  footer{
-    padding:36px 40px 60px;font-family:var(--mono);font-size:11.5px;color:var(--text-dim);
-    max-width:880px;
-  }
-
-  @media (max-width:860px){
-    .skills-grid{grid-template-columns:1fr;}
-    section{padding:48px 22px;}
-  }
-
-  @media (max-width:760px){
-    .topbar{display:flex;}
-    .sidebar{
-      position:fixed;left:0;top:53px;bottom:0;z-index:40;
-      transform:translateX(-100%);
-      transition:transform .25s ease;
-      width:82vw;max-width:300px;
-      box-shadow:0 0 40px rgba(0,0,0,.5);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Praveenraj M — Senior Frontend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="./assets/letter-p.png" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --bg-surface: #10141c;
+      --bg-elevated: #161b26;
+      --border: #212836;
+      --text: #e7e9ee;
+      --text-muted: #8891a3;
+      --text-dim: #535c6e;
+      --accent: #7fae8e;
+      --accent-strong: #a3d9b1;
+      --accent-amber: #e8a854;
+      --accent-red: #e8646b;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+      --sans: 'Inter', system-ui, sans-serif;
+      --sidebar-w: 260px;
     }
-    .sidebar.open{transform:translateX(0);}
-    .app{flex-direction:column;}
-    .editor-tabs{top:53px;}
-    .job-head{flex-direction:column;align-items:flex-start;}
-  }
 
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    .bar-fill{transition:none;}
-  }
-</style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #0b0e14;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent-strong);
+      outline-offset: 2px;
+    }
+
+    /* ---------- Top bar (mobile) ---------- */
+    .topbar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 16px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar .brand {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--accent-strong);
+    }
+
+    .topbar .toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-muted);
+      width: 36px;
+      height: 36px;
+      font-family: var(--mono);
+      cursor: pointer;
+    }
+
+    /* ---------- Layout ---------- */
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ---------- Sidebar / file tree ---------- */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 22px 0 20px;
+    }
+
+    .sidebar-head {
+      padding: 0 20px 18px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .sidebar-head .name {
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .sidebar-head .role {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .tree {
+      list-style: none;
+      padding: 0 10px;
+      font-family: var(--mono);
+      font-size: 13.5px;
+    }
+
+    .tree .folder {
+      color: var(--text-dim);
+      padding: 6px 10px;
+      letter-spacing: .02em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .tree .folder svg {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+    }
+
+    .tree .file {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 10px 7px 26px;
+      border-radius: 6px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background .15s, color .15s;
+      border-left: 2px solid transparent;
+    }
+
+    .tree .file.indent2 {
+      padding-left: 38px;
+    }
+
+    .tree .file:hover {
+      background: var(--bg-elevated);
+      color: var(--text);
+    }
+
+    .tree .file.active {
+      background: var(--bg-elevated);
+      color: var(--accent-strong);
+      border-left: 2px solid var(--accent);
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot.green {
+      background: var(--accent);
+    }
+
+    .dot.amber {
+      background: var(--accent-amber);
+    }
+
+    .dot.red {
+      background: var(--accent-red);
+    }
+
+    .dot.blue {
+      background: #6ea8d8;
+    }
+
+    .sidebar-foot {
+      padding: 16px 20px 0;
+      margin-top: 16px;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-dim);
+    }
+
+    /* ---------- Main / editor pane ---------- */
+    .main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .editor-tabs {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--text-dim);
+      height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .editor-tabs .crumb-current {
+      color: var(--accent-strong);
+    }
+
+    .editor-tabs .sep {
+      color: var(--text-dim);
+    }
+
+    section {
+      padding: 70px 40px;
+      max-width: 880px;
+    }
+
+    section.hero {
+      padding-top: 80px;
+      padding-bottom: 64px;
+      max-width: 880px;
+    }
+
+    h2.section-title {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: .08em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2.section-title::before {
+      content: "//";
+      color: var(--text-dim);
+    }
+
+    /* ---------- Hero ---------- */
+    .hero .eyebrow {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 18px;
+    }
+
+    .hero .eyebrow .prompt {
+      color: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -.02em;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 .role {
+      display: block;
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--accent-strong);
+      margin-top: 14px;
+      letter-spacing: 0;
+    }
+
+    .hero .tagline {
+      color: var(--text-muted);
+      font-size: 17px;
+      max-width: 600px;
+      margin: 22px 0 36px;
+    }
+
+    .hero .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 44px;
+    }
+
+    .pill {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    /* ---------- Signature: bundle size compression viz ---------- */
+    .compression-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 26px 28px 24px;
+      max-width: 520px;
+      margin-left: 25px;
+      margin-top: 25px
+    }
+
+    .compression-card .label {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .compression-card .label .result {
+      color: var(--accent-strong);
+      font-weight: 600;
+    }
+
+    .bar-track {
+      position: relative;
+      height: 34px;
+      background: var(--bg-elevated);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .bar-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      background: linear-gradient(90deg, var(--accent-amber), var(--accent));
+      border-radius: 6px;
+      transition: width 1.4s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .bar-fill.shrunk {
+      width: 25%;
+    }
+
+    .bar-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-dim);
+      margin-top: 10px;
+    }
+
+    .bar-labels span:first-child {
+      color: var(--accent-amber);
+    }
+
+    .bar-labels span:last-child {
+      color: var(--accent-strong);
+    }
+
+    /* ---------- Skills ---------- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 22px;
+    }
+
+    .skill-card .key {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--accent-amber);
+      margin-bottom: 12px;
+      padding-top: 10px;
+    }
+
+    .tag-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 5px 10px;
+    }
+
+    /* ---------- Experience ---------- */
+    .job {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-surface);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .job-head {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .job-head .title-block .role {
+      font-weight: 700;
+      font-size: 17px;
+    }
+
+    .job-head .title-block .company {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent-strong);
+      margin-top: 4px;
+    }
+
+    .job-head .dates {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 11px;
+      white-space: nowrap;
+    }
+
+    .job-body {
+      padding: 18px 24px 22px;
+    }
+
+    .job-body ul {
+      list-style: none;
+    }
+
+    .job-body li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 10px;
+      color: var(--text-muted);
+      font-size: 14.5px;
+    }
+
+    .job-body li::before {
+      content: "//";
+      position: absolute;
+      left: 0;
+      color: var(--text-dim);
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+
+    .job-body li strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ---------- Achievements ---------- */
+    .log-list {
+      font-family: var(--mono);
+      font-size: 14px;
+    }
+
+    .log-entry {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .log-entry:last-child {
+      border-bottom: none;
+    }
+
+    .log-entry .tag {
+      flex-shrink: 0;
+      color: var(--accent-amber);
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 12px;
+    }
+
+    .log-entry .msg {
+      color: var(--text);
+    }
+
+    .log-entry .msg span {
+      color: var(--text-muted);
+    }
+
+    /* ---------- Education ---------- */
+    .edu-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg-surface);
+      padding: 22px 24px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .edu-card .degree {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .edu-card .school {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .edu-card .gpa {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent-strong);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 5px 12px;
+    }
+
+    /* ---------- Contact / terminal ---------- */
+    .terminal {
+      background: #080a0f;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .terminal-bar {
+      background: var(--bg-elevated);
+      padding: 10px 16px;
+      display: flex;
+      gap: 7px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .terminal-bar span {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .terminal-bar span:nth-child(1) {
+      background: #e8646b;
+    }
+
+    .terminal-bar span:nth-child(2) {
+      background: #e8a854;
+    }
+
+    .terminal-bar span:nth-child(3) {
+      background: #7fae8e;
+    }
+
+    .terminal-body {
+      padding: 22px 24px 26px;
+      font-family: var(--mono);
+      font-size: 13.5px;
+    }
+
+    .terminal-body .line {
+      margin-bottom: 14px;
+    }
+
+    .terminal-body .prompt {
+      color: var(--accent);
+    }
+
+    .terminal-body .cmd {
+      color: var(--text);
+    }
+
+    .terminal-body .out {
+      color: var(--text-muted);
+      margin-left: 20px;
+    }
+
+    .terminal-body a.out {
+      color: var(--accent-strong);
+      cursor: pointer;
+    }
+
+    .terminal-body a.out:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: 36px 40px 60px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-dim);
+      max-width: 880px;
+    }
+
+    @media (max-width:860px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 48px 22px;
+      }
+    }
+
+    @media (max-width:760px) {
+      .topbar {
+        display: flex;
+      }
+
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 53px;
+        bottom: 0;
+        z-index: 40;
+        transform: translateX(-100%);
+        transition: transform .25s ease;
+        width: 82vw;
+        max-width: 300px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, .5);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .app {
+        flex-direction: column;
+      }
+
+      .editor-tabs {
+        top: 53px;
+      }
+
+      .job-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .bar-fill {
+        transition: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="topbar">
-  <span class="brand">praveenraj.dev</span>
-  <button class="toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
-</div>
+  <div class="topbar">
+    <span class="brand">praveenraj.dev</span>
+    <button class="toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+  </div>
 
-<div class="app">
+  <div class="app">
 
-  <!-- SIDEBAR -->
-  <nav class="sidebar" id="sidebar" aria-label="Section navigation">
-    <div class="sidebar-head">
-      <div class="name">praveenraj-m</div>
-      <div class="role">Senior Frontend Developer</div>
-    </div>
-    <ul class="tree">
-      <li class="file" data-target="home"><span class="dot blue"></span> index.tsx</li>
-      <li class="file" data-target="skills"><span class="dot amber"></span> skills.json</li>
-      <li class="folder">
-        <svg viewBox="0 0 16 16" fill="none"><path d="M1 3.5a1 1 0 011-1h4l1.5 2H14a1 1 0 011 1v7a1 1 0 01-1 1H2a1 1 0 01-1-1v-9z" stroke="currentColor" stroke-width="1.2"/></svg>
-        experience/
-      </li>
-      <li class="file indent2" data-target="job-altimetrik"><span class="dot green"></span> altimetrik.tsx</li>
-      <li class="file indent2" data-target="job-zumen"><span class="dot green"></span> zumen.tsx</li>
-      <li class="file indent2" data-target="job-sparx"><span class="dot green"></span> sparx.tsx</li>
-      <li class="file" data-target="education"><span class="dot blue"></span> education.md</li>
-      <li class="file" data-target="achievements"><span class="dot red"></span> achievements.log</li>
-      <li class="file" data-target="contact"><span class="dot green"></span> contact.sh</li>
-    </ul>
-    <div class="sidebar-foot">Tiruchirapalli, Tamil Nadu, India</div>
-  </nav>
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar" aria-label="Section navigation">
+      <div class="sidebar-head">
+        <div class="name">praveenraj-m</div>
+        <div class="role">Senior Frontend Developer</div>
+      </div>
+      <ul class="tree">
+        <li class="file" data-target="home"><span class="dot blue"></span> index.tsx</li>
+        <li class="file" data-target="skills"><span class="dot amber"></span> skills.json</li>
+        <li class="folder">
+          <svg viewBox="0 0 16 16" fill="none">
+            <path d="M1 3.5a1 1 0 011-1h4l1.5 2H14a1 1 0 011 1v7a1 1 0 01-1 1H2a1 1 0 01-1-1v-9z" stroke="currentColor"
+              stroke-width="1.2" />
+          </svg>
+          experience/
+        </li>
+        <li class="file indent2" data-target="job-altimetrik"><span class="dot green"></span> altimetrik.tsx</li>
+        <li class="file indent2" data-target="job-zumen"><span class="dot green"></span> zumen.tsx</li>
+        <li class="file indent2" data-target="job-sparx"><span class="dot green"></span> sparx.tsx</li>
+        <li class="file" data-target="education"><span class="dot blue"></span> education.md</li>
+        <li class="file" data-target="achievements"><span class="dot red"></span> achievements.log</li>
+        <li class="file" data-target="contact"><span class="dot green"></span> contact.sh</li>
+      </ul>
+      <div class="sidebar-foot">Tiruchirapalli, Tamil Nadu, India</div>
+    </nav>
 
-  <!-- MAIN -->
-  <main class="main">
-    <div class="editor-tabs">
-      <span>portfolio</span><span class="sep">/</span><span class="crumb-current" id="crumb">index.tsx</span>
-    </div>
-
-    <!-- HERO -->
-    <section class="hero" id="home">
-      <div class="eyebrow"><span class="prompt">$</span> whoami</div>
-      <h1>Praveenraj M
-        <span class="role">Senior Frontend Developer — React.js</span>
-      </h1>
-      <p class="tagline">6+ years turning complex product requirements into fast, maintainable React applications — most recently powering Samsung's Mobile Shop App across multiple countries.</p>
-      <div class="meta-row">
-        <span class="pill">📍 Tiruchirapalli, Tamil Nadu, India</span>
-        <span class="pill"><a href="mailto:askpravinraj@gmail.com">✉ askpravinraj@gmail.com</a></span>
-        <span class="pill">☎ <a href="tel:+916379727040">+91 63797-27040</a></span>
+    <!-- MAIN -->
+    <main class="main">
+      <div class="editor-tabs">
+        <span>portfolio</span><span class="sep">/</span><span class="crumb-current" id="crumb">index.tsx</span>
       </div>
 
-      <div class="compression-card" id="compressionCard">
-        <div class="label"><span>ShopCMS · production bundle size</span><span class="result">-75%</span></div>
-        <div class="bar-track"><div class="bar-fill" id="barFill"></div></div>
-        <div class="bar-labels"><span>6.0 MB</span><span>1.5 MB</span></div>
-      </div>
-    </section>
+      <!-- HERO -->
+      <section class="hero" id="home">
+        <div class="eyebrow"><span class="prompt">$</span> whoami</div>
+        <h1>Praveenraj M
+          <span class="role">Senior Frontend Developer — React.js</span>
+        </h1>
+        <p class="tagline">6+ years turning complex product requirements into fast, maintainable React applications —
+          most recently powering Samsung's Mobile Shop App across multiple countries.</p>
+        <div class="meta-row">
+          <span class="pill">📍 Tiruchirapalli, Tamil Nadu, India</span>
+          <span class="pill"><a href="mailto:askpravinraj@gmail.com">✉ askpravinraj@gmail.com</a></span>
+          <span class="pill">☎ <a href="tel:+916379727040">+91 63797-27040</a></span>
+        </div>
 
-    <!-- SKILLS -->
-    <section id="skills">
-      <h2 class="section-title">skills.json</h2>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <div class="key">languages_frameworks :[</div>
-          <div class="tag-wrap">
-            <span class="tag">JavaScript (ES6+)</span><span class="tag">TypeScript</span>
-            <span class="tag">React.js</span><span class="tag">jQuery</span>
-            <span class="tag">HTML5</span><span class="tag">CSS3 / SCSS</span>
+
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <h2 class="section-title">skills.json</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="key">languages_frameworks :[</div>
+            <div class="tag-wrap">
+              <span class="tag">JavaScript (ES6+)</span><span class="tag">TypeScript</span>
+              <span class="tag">React.js</span><span class="tag">jQuery</span>
+              <span class="tag">HTML5</span><span class="tag">CSS3 / SCSS</span>
+            </div>
+            <div class="key">]</div>
           </div>
-           <div class="key">]</div>
-        </div>
-        <div class="skill-card">
-          <div class="key">frontend_architecture :[</div>
-          <div class="tag-wrap">
-            <span class="tag">Component Architecture</span><span class="tag">Micro-Frontends</span>
-            <span class="tag">State Management</span><span class="tag">RBAC / Protected Routes</span>
-            <span class="tag">MVC</span>
+          <div class="skill-card">
+            <div class="key">frontend_architecture :[</div>
+            <div class="tag-wrap">
+              <span class="tag">Component Architecture</span><span class="tag">Micro-Frontends</span>
+              <span class="tag">State Management</span><span class="tag">RBAC / Protected Routes</span>
+              <span class="tag">MVC</span>
+            </div>
+            <div class="key">]</div>
           </div>
-          <div class="key">]</div>
-        </div>
-        <div class="skill-card">
-          <div class="key">tools_platforms :[</div>
-          <div class="tag-wrap">
-            <span class="tag">Git</span><span class="tag">Webpack</span>
-            <span class="tag">Jenkins (CI/CD)</span><span class="tag">Kibana</span>
-            <span class="tag">Bootstrap</span><span class="tag">Redactor</span><span class="tag">DataTables</span>
+          <div class="skill-card">
+            <div class="key">tools_platforms :[</div>
+            <div class="tag-wrap">
+              <span class="tag">Git</span><span class="tag">Webpack</span>
+              <span class="tag">Jenkins (CI/CD)</span><span class="tag">Kibana</span>
+              <span class="tag">Bootstrap</span><span class="tag">Redactor</span><span class="tag">DataTables</span>
+            </div>
+            <div class="key">]</div>
           </div>
-          <div class="key">]</div>
-        </div>
-        <div class="skill-card">
-          <div class="key">practices :[</div>
-          <div class="tag-wrap">
-            <span class="tag">Performance Optimization</span><span class="tag">i18next</span>
-            <span class="tag">Responsive Design</span><span class="tag">Cross-Browser Support</span>
-            <span class="tag">SEO</span><span class="tag">Agile / Scrum</span>
-            <span class="tag">Code Reviews</span><span class="tag">Mentoring</span>
+          <div class="skill-card">
+            <div class="key">practices :[</div>
+            <div class="tag-wrap">
+              <span class="tag">Performance Optimization</span><span class="tag">i18next</span>
+              <span class="tag">Responsive Design</span><span class="tag">Cross-Browser Support</span>
+              <span class="tag">SEO</span><span class="tag">Agile / Scrum</span>
+              <span class="tag">Code Reviews</span><span class="tag">Mentoring</span>
+            </div>
+            <div class="key">]</div>
           </div>
-           <div class="key">]</div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience">
-      <h2 class="section-title">experience/</h2>
+      <!-- EXPERIENCE -->
+      <section id="experience">
+        <h2 class="section-title">experience/</h2>
 
-      <div class="job" id="job-altimetrik">
-        <div class="job-head">
-          <div class="title-block">
-            <div class="role">Senior Engineer — Product &amp; Platform</div>
-            <div class="company">Altimetrik India Pvt Ltd · Client: Samsung</div>
+        <div class="job" id="job-altimetrik">
+          <div class="job-head">
+            <div class="title-block">
+              <div class="role">Senior Engineer — Product &amp; Platform</div>
+              <div class="company">Altimetrik India Pvt Ltd · Client: Samsung</div>
+            </div>
+            <div class="dates">2023 — Present</div>
           </div>
-          <div class="dates">2023 — Present</div>
-        </div>
-        <div class="job-body">
-          <ul>
-            <li>Build and maintain <strong>ShopCMS</strong>, the CMS behind the Samsung Mobile Shop App, live across multiple countries</li>
-            <li>Cut production bundle size from <strong>6MB to 1.5MB (75%)</strong> through targeted performance work, improving load times</li>
-            <li>Set the component structure, state management strategy, and folder conventions the wider team still follows</li>
-            <li>Moved the app to a <strong>micro-frontend architecture</strong> so features can ship independently</li>
-            <li>Locked down modules with <strong>RBAC</strong> via protected routes</li>
-            <li>Integrated <strong>i18next</strong> for multilingual rollout across global markets</li>
-            <li>Ran deployments through <strong>Jenkins CI/CD</strong> and tracked API failures in <strong>Kibana</strong></li>
-            <li>Mentored junior engineers through critical delivery milestones and led code reviews for QA and support</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="job" id="job-zumen">
-        <div class="job-head">
-          <div class="title-block">
-            <div class="role">UI Developer</div>
-            <div class="company">Zumen — Cloud-Based Source-to-Pay Platform</div>
+          <div class="compression-card" id="compressionCard">
+            <div class="label"><span>ShopCMS · production bundle size</span><span class="result">-75%</span></div>
+            <div class="bar-track">
+              <div class="bar-fill" id="barFill"></div>
+            </div>
+            <div class="bar-labels"><span>6.0 MB</span><span>1.5 MB</span></div>
           </div>
-          <div class="dates">2021 — 2023</div>
-        </div>
-        <div class="job-body">
-          <ul>
-            <li>Shipped UI improvements and proof-of-concepts for a source-to-pay platform used by manufacturing enterprises</li>
-            <li>Rolled out <strong>Whatfix</strong> and <strong>Doc360</strong> to streamline customer onboarding and cut support load</li>
-            <li>Turned wireframes and design mockups into maintainable frontend code</li>
-            <li>Diagnosed and fixed high-priority production issues with fast turnaround</li>
-            <li>Built reusable UI components and libraries for consistency across the product</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="job" id="job-sparx">
-        <div class="job-head">
-          <div class="title-block">
-            <div class="role">Frontend Developer</div>
-            <div class="company">Sparx Systems India — Prolaborate</div>
+          <div class="job-body">
+            <ul>
+              <li>Build and maintain <strong>ShopCMS</strong>, the CMS behind the Samsung Mobile Shop App, live across
+                multiple countries</li>
+              <li>Cut production bundle size from <strong>6MB to 1.5MB (75%)</strong> through targeted performance work,
+                improving load times</li>
+              <li>Set the component structure, state management strategy, and folder conventions the wider team still
+                follows</li>
+              <li>Moved the app to a <strong>micro-frontend architecture</strong> so features can ship independently
+              </li>
+              <li>Locked down modules with <strong>RBAC</strong> via protected routes</li>
+              <li>Integrated <strong>i18next</strong> for multilingual rollout across global markets</li>
+              <li>Ran deployments through <strong>Jenkins CI/CD</strong> and tracked API failures in
+                <strong>Kibana</strong></li>
+              <li>Mentored junior engineers through critical delivery milestones and led code reviews for QA and support
+              </li>
+            </ul>
           </div>
-          <div class="dates">2019 — 2021</div>
         </div>
-        <div class="job-body">
-          <ul>
-            <li>Improved UI and resolved bugs across a large-scale enterprise product built on MVC</li>
-            <li>Migrated <strong>Bootstrap v3 → v4</strong> and <strong>jQuery v1 → v3</strong>, modernizing the codebase</li>
-            <li>Deployed and customized third-party plugins: Redactor, DataTables, Simplebar, Spectrum</li>
-            <li>Added Google reCAPTCHA v3 and image lazy-loading to improve security and page speed</li>
-            <li>Raised SEO and page-speed scores through frontend optimization</li>
-          </ul>
+
+        <div class="job" id="job-zumen">
+          <div class="job-head">
+            <div class="title-block">
+              <div class="role">UI Developer</div>
+              <div class="company">Zumen — Cloud-Based Source-to-Pay Platform</div>
+            </div>
+            <div class="dates">2021 — 2023</div>
+          </div>
+          <div class="job-body">
+            <ul>
+              <li>Shipped UI improvements and proof-of-concepts for a source-to-pay platform used by manufacturing
+                enterprises</li>
+              <li>Rolled out <strong>Whatfix</strong> and <strong>Doc360</strong> to streamline customer onboarding and
+                cut support load</li>
+              <li>Turned wireframes and design mockups into maintainable frontend code</li>
+              <li>Diagnosed and fixed high-priority production issues with fast turnaround</li>
+              <li>Built reusable UI components and libraries for consistency across the product</li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <!-- EDUCATION -->
-    <section id="education">
-      <h2 class="section-title">education.md</h2>
-      <div class="edu-card">
-        <div>
-          <div class="degree">Bachelor of Technology</div>
-          <div class="school">KCG College of Technology · 2015 — 2019</div>
+        <div class="job" id="job-sparx">
+          <div class="job-head">
+            <div class="title-block">
+              <div class="role">Frontend Developer</div>
+              <div class="company">Sparx Systems India — Prolaborate</div>
+            </div>
+            <div class="dates">2019 — 2021</div>
+          </div>
+          <div class="job-body">
+            <ul>
+              <li>Improved UI and resolved bugs across a large-scale enterprise product built on MVC</li>
+              <li>Migrated <strong>Bootstrap v3 → v4</strong> and <strong>jQuery v1 → v3</strong>, modernizing the
+                codebase</li>
+              <li>Deployed and customized third-party plugins: Redactor, DataTables, Simplebar, Spectrum</li>
+              <li>Added Google reCAPTCHA v3 and image lazy-loading to improve security and page speed</li>
+              <li>Raised SEO and page-speed scores through frontend optimization</li>
+            </ul>
+          </div>
         </div>
-        <div class="gpa">CGPA 7.1</div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ACHIEVEMENTS -->
-    <section id="achievements">
-      <h2 class="section-title">achievements.log</h2>
-      <div class="log-list">
-        <div class="log-entry">
-          <span class="tag">[AWARD]</span>
-          <span class="msg">Customer Champion Award <span>— won multiple times for accountability and ownership</span></span>
+      <!-- EDUCATION -->
+      <section id="education">
+        <h2 class="section-title">education.md</h2>
+        <div class="edu-card">
+          <div>
+            <div class="degree">Bachelor of Technology</div>
+            <div class="school">KCG College of Technology · 2015 — 2019</div>
+          </div>
+          <div class="gpa">CGPA 7.1</div>
         </div>
-        <div class="log-entry">
-          <span class="tag">[AWARD]</span>
-          <span class="msg">1st Place, Hackathon <span>— 2022</span></span>
+      </section>
+
+      <!-- ACHIEVEMENTS -->
+      <section id="achievements">
+        <h2 class="section-title">achievements.log</h2>
+        <div class="log-list">
+          <div class="log-entry">
+            <span class="tag">[AWARD]</span>
+            <span class="msg">Customer Champion Award <span>— won multiple times for accountability and
+                ownership</span></span>
+          </div>
+          <div class="log-entry">
+            <span class="tag">[AWARD]</span>
+            <span class="msg">1st Place, Hackathon <span>— 2022</span></span>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- CONTACT -->
-    <section id="contact">
-      <h2 class="section-title">contact.sh</h2>
-      <div class="terminal">
-        <div class="terminal-bar"><span></span><span></span><span></span></div>
-        <div class="terminal-body">
-          <div class="line"><span class="prompt">$</span> <span class="cmd">./contact --email</span></div>
-          <div class="line out"><a class="out" href="mailto:askpravinraj@gmail.com">askpravinraj@gmail.com</a></div>
-          <div class="line"><span class="prompt">$</span> <span class="cmd">./contact --phone</span></div>
-          <div class="line out"><a class="out" href="tel:+916379727040">+91 63797-27040</a></div>
-          <div class="line"><span class="prompt">$</span> <span class="cmd">./contact --linkedin</span></div>
-          <div class="line out"><a class="out" href="https://linkedin.com/in/praveenraj-maran-142246193" target="_blank" rel="noopener">linkedin.com/in/praveenraj-maran-142246193</a></div>
-          <div class="line"><span class="prompt">$</span> <span class="cmd">echo $STATUS</span></div>
-          <div class="line out">open to new opportunities</div>
+      <!-- CONTACT -->
+      <section id="contact">
+        <h2 class="section-title">contact.sh</h2>
+        <div class="terminal">
+          <div class="terminal-bar"><span></span><span></span><span></span></div>
+          <div class="terminal-body">
+            <div class="line"><span class="prompt">$</span> <span class="cmd">./contact --email</span></div>
+            <div class="line out"><a class="out" href="mailto:askpravinraj@gmail.com">askpravinraj@gmail.com</a></div>
+            <div class="line"><span class="prompt">$</span> <span class="cmd">./contact --phone</span></div>
+            <div class="line out"><a class="out" href="tel:+916379727040">+91 63797-27040</a></div>
+            <div class="line"><span class="prompt">$</span> <span class="cmd">./contact --linkedin</span></div>
+            <div class="line out"><a class="out" href="https://linkedin.com/in/praveenraj-maran-142246193"
+                target="_blank" rel="noopener">linkedin.com/in/praveenraj-maran-142246193</a></div>
+            <div class="line"><span class="prompt">$</span> <span class="cmd">echo $STATUS</span></div>
+            <div class="line out">open to new opportunities</div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <footer>Built from source · Praveenraj M © 2026</footer>
-  </main>
-</div>
+      <footer>Built from source · Praveenraj M © 2026</footer>
+    </main>
+  </div>
 
-<script>
-  // Mobile nav toggle
-  const toggle = document.getElementById('navToggle');
-  const sidebar = document.getElementById('sidebar');
-  if(toggle){
-    toggle.addEventListener('click', () => sidebar.classList.toggle('open'));
-  }
+  <script>
+    // Mobile nav toggle
+    const toggle = document.getElementById('navToggle');
+    const sidebar = document.getElementById('sidebar');
+    if (toggle) {
+      toggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+    }
 
-  // File tree click -> scroll + close mobile nav
-  const files = document.querySelectorAll('.tree .file');
-  const targets = {};
-  files.forEach(f => {
-    const id = f.dataset.target;
-    const el = document.getElementById(id === 'experience' ? 'experience' : id);
-    if(el) targets[id] = el;
-    f.addEventListener('click', () => {
-      const target = document.getElementById(id);
-      if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
-      sidebar.classList.remove('open');
+    // File tree click -> scroll + close mobile nav
+    const files = document.querySelectorAll('.tree .file');
+    const targets = {};
+    files.forEach(f => {
+      const id = f.dataset.target;
+      const el = document.getElementById(id === 'experience' ? 'experience' : id);
+      if (el) targets[id] = el;
+      f.addEventListener('click', () => {
+        const target = document.getElementById(id);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        sidebar.classList.remove('open');
+      });
     });
-  });
 
-  // Scroll spy
-  const crumb = document.getElementById('crumb');
-  const labelMap = {
-    'home':'index.tsx','skills':'skills.json',
-    'job-altimetrik':'experience/altimetrik.tsx','job-zumen':'experience/zumen.tsx','job-sparx':'experience/sparx.tsx',
-    'education':'education.md','achievements':'achievements.log','contact':'contact.sh'
-  };
-  const observed = Object.keys(labelMap).map(id => document.getElementById(id)).filter(Boolean);
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        const id = entry.target.id;
-        files.forEach(f => f.classList.toggle('active', f.dataset.target === id));
-        if(labelMap[id]) crumb.textContent = labelMap[id];
-      }
-    });
-  }, {rootMargin: '-20% 0px -70% 0px', threshold: 0});
-  observed.forEach(el => io.observe(el));
+    // Scroll spy
+    const crumb = document.getElementById('crumb');
+    const labelMap = {
+      'home': 'index.tsx', 'skills': 'skills.json',
+      'job-altimetrik': 'experience/altimetrik.tsx', 'job-zumen': 'experience/zumen.tsx', 'job-sparx': 'experience/sparx.tsx',
+      'education': 'education.md', 'achievements': 'achievements.log', 'contact': 'contact.sh'
+    };
+    const observed = Object.keys(labelMap).map(id => document.getElementById(id)).filter(Boolean);
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          files.forEach(f => f.classList.toggle('active', f.dataset.target === id));
+          if (labelMap[id]) crumb.textContent = labelMap[id];
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+    observed.forEach(el => io.observe(el));
 
-  // Bundle size compression animation
-  const bar = document.getElementById('barFill');
-  const card = document.getElementById('compressionCard');
-  const barIo = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        requestAnimationFrame(() => bar.classList.add('shrunk'));
-        barIo.disconnect();
-      }
-    });
-  }, {threshold:0.4});
-  if(card) barIo.observe(card);
-</script>
+    // Bundle size compression animation
+    const bar = document.getElementById('barFill');
+    const card = document.getElementById('compressionCard');
+    const barIo = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          requestAnimationFrame(() => bar.classList.add('shrunk'));
+          barIo.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+    if (card) barIo.observe(card);
+  </script>
 
 </body>
+
 </html>
