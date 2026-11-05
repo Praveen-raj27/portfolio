@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,12 +6,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Praveenraj M — Senior Frontend Developer</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="icon" type="image/png" href="./assets/letter-p.png" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet">
+  <link rel="icon" type="image/png" href="./assets/letter-p.png">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #0b0e14;
@@ -62,7 +63,7 @@
       outline-offset: 2px;
     }
 
-    /* ---------- Top bar (mobile) ---------- */
+    /* Topbar */
     .topbar {
       display: none;
       position: sticky;
@@ -92,13 +93,13 @@
       cursor: pointer;
     }
 
-    /* ---------- Layout ---------- */
+    /* Layout */
     .app {
       display: flex;
       min-height: 100vh;
     }
 
-    /* ---------- Sidebar / file tree ---------- */
+    /* Sidebar */
     .sidebar {
       width: var(--sidebar-w);
       flex-shrink: 0;
@@ -187,21 +188,10 @@
       flex-shrink: 0;
     }
 
-    .dot.green {
-      background: var(--accent);
-    }
-
-    .dot.amber {
-      background: var(--accent-amber);
-    }
-
-    .dot.red {
-      background: var(--accent-red);
-    }
-
-    .dot.blue {
-      background: #6ea8d8;
-    }
+    .dot.green { background: var(--accent); }
+    .dot.amber { background: var(--accent-amber); }
+    .dot.red { background: var(--accent-red); }
+    .dot.blue { background: #6ea8d8; }
 
     .sidebar-foot {
       padding: 16px 20px 0;
@@ -212,7 +202,7 @@
       color: var(--text-dim);
     }
 
-    /* ---------- Main / editor pane ---------- */
+    /* Main */
     .main {
       flex: 1;
       min-width: 0;
@@ -247,6 +237,7 @@
     section {
       padding: 70px 40px;
       max-width: 880px;
+      scroll-margin-top: 55px;
     }
 
     section.hero {
@@ -272,7 +263,7 @@
       color: var(--text-dim);
     }
 
-    /* ---------- Hero ---------- */
+    /* Hero */
     .hero .eyebrow {
       font-family: var(--mono);
       font-size: 13px;
@@ -329,7 +320,7 @@
       gap: 7px;
     }
 
-    /* ---------- Signature: bundle size compression viz ---------- */
+    /* Bundle visualization */
     .compression-card {
       background: var(--bg-surface);
       border: 1px solid var(--border);
@@ -337,7 +328,8 @@
       padding: 26px 28px 24px;
       max-width: 520px;
       margin-left: 25px;
-      margin-top: 25px
+      margin-top: 25px;
+      margin-bottom: 20px;
     }
 
     .compression-card .label {
@@ -387,15 +379,10 @@
       margin-top: 10px;
     }
 
-    .bar-labels span:first-child {
-      color: var(--accent-amber);
-    }
+    .bar-labels span:first-child { color: var(--accent-amber); }
+    .bar-labels span:last-child { color: var(--accent-strong); }
 
-    .bar-labels span:last-child {
-      color: var(--accent-strong);
-    }
-
-    /* ---------- Skills ---------- */
+    /* Skills */
     .skills-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -433,7 +420,7 @@
       padding: 5px 10px;
     }
 
-    /* ---------- Experience ---------- */
+    /* Experience */
     .job {
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -504,7 +491,93 @@
       font-weight: 600;
     }
 
-    /* ---------- Achievements ---------- */
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .project-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .project-icon {
+      font-size: 25px;
+    }
+
+    .project-status {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent-strong);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 10px;
+    }
+
+    .project-card h3 {
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: auto;
+      margin-bottom: 20px;
+    }
+
+    .project-tech span {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent-amber);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 5px 8px;
+    }
+
+    .project-link {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent-strong);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      width: fit-content;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Achievements */
     .log-list {
       font-family: var(--mono);
       font-size: 14px;
@@ -531,15 +604,10 @@
       font-size: 12px;
     }
 
-    .log-entry .msg {
-      color: var(--text);
-    }
+    .log-entry .msg { color: var(--text); }
+    .log-entry .msg span { color: var(--text-muted); }
 
-    .log-entry .msg span {
-      color: var(--text-muted);
-    }
-
-    /* ---------- Education ---------- */
+    /* Education */
     .edu-card {
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -572,7 +640,7 @@
       padding: 5px 12px;
     }
 
-    /* ---------- Contact / terminal ---------- */
+    /* Contact */
     .terminal {
       background: #080a0f;
       border: 1px solid var(--border);
@@ -595,17 +663,9 @@
       display: inline-block;
     }
 
-    .terminal-bar span:nth-child(1) {
-      background: #e8646b;
-    }
-
-    .terminal-bar span:nth-child(2) {
-      background: #e8a854;
-    }
-
-    .terminal-bar span:nth-child(3) {
-      background: #7fae8e;
-    }
+    .terminal-bar span:nth-child(1) { background: #e8646b; }
+    .terminal-bar span:nth-child(2) { background: #e8a854; }
+    .terminal-bar span:nth-child(3) { background: #7fae8e; }
 
     .terminal-body {
       padding: 22px 24px 26px;
@@ -617,13 +677,8 @@
       margin-bottom: 14px;
     }
 
-    .terminal-body .prompt {
-      color: var(--accent);
-    }
-
-    .terminal-body .cmd {
-      color: var(--text);
-    }
+    .terminal-body .prompt { color: var(--accent); }
+    .terminal-body .cmd { color: var(--text); }
 
     .terminal-body .out {
       color: var(--text-muted);
@@ -647,17 +702,23 @@
       max-width: 880px;
     }
 
-    @media (max-width:860px) {
-      .skills-grid {
+    /* Responsive */
+    @media (max-width: 860px) {
+      .skills-grid,
+      .projects-grid {
         grid-template-columns: 1fr;
       }
 
       section {
         padding: 48px 22px;
       }
+
+      .compression-card {
+        margin-left: 0;
+      }
     }
 
-    @media (max-width:760px) {
+    @media (max-width: 760px) {
       .topbar {
         display: flex;
       }
@@ -701,6 +762,10 @@
       .bar-fill {
         transition: none;
       }
+
+      .project-card {
+        transition: none;
+      }
     }
   </style>
 </head>
@@ -709,7 +774,7 @@
 
   <div class="topbar">
     <span class="brand">praveenraj.dev</span>
-    <button class="toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+    <button class="toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
   </div>
 
   <div class="app">
@@ -720,39 +785,53 @@
         <div class="name">praveenraj-m</div>
         <div class="role">Senior Frontend Developer</div>
       </div>
+
       <ul class="tree">
         <li class="file" data-target="home"><span class="dot blue"></span> index.tsx</li>
         <li class="file" data-target="skills"><span class="dot amber"></span> skills.json</li>
+
         <li class="folder">
           <svg viewBox="0 0 16 16" fill="none">
-            <path d="M1 3.5a1 1 0 011-1h4l1.5 2H14a1 1 0 011 1v7a1 1 0 01-1 1H2a1 1 0 01-1-1v-9z" stroke="currentColor"
-              stroke-width="1.2" />
+            <path d="M1 3.5a1 1 0 011-1h4l1.5 2H14a1 1 0 011 1v7a1 1 0 01-1 1H2a1 1 0 01-1-1v-9z" stroke="currentColor" stroke-width="1.2" />
           </svg>
           experience/
         </li>
+
         <li class="file indent2" data-target="job-altimetrik"><span class="dot green"></span> altimetrik.tsx</li>
         <li class="file indent2" data-target="job-zumen"><span class="dot green"></span> zumen.tsx</li>
         <li class="file indent2" data-target="job-sparx"><span class="dot green"></span> sparx.tsx</li>
+
+        <li class="file" data-target="projects"><span class="dot amber"></span> projects.tsx</li>
         <li class="file" data-target="education"><span class="dot blue"></span> education.md</li>
         <li class="file" data-target="achievements"><span class="dot red"></span> achievements.log</li>
         <li class="file" data-target="contact"><span class="dot green"></span> contact.sh</li>
       </ul>
+
       <div class="sidebar-foot">Tiruchirapalli, Tamil Nadu, India</div>
     </nav>
 
     <!-- MAIN -->
     <main class="main">
+
       <div class="editor-tabs">
-        <span>portfolio</span><span class="sep">/</span><span class="crumb-current" id="crumb">index.tsx</span>
+        <span>portfolio</span>
+        <span class="sep">/</span>
+        <span class="crumb-current" id="crumb">index.tsx</span>
       </div>
 
       <!-- HERO -->
       <section class="hero" id="home">
         <div class="eyebrow"><span class="prompt">$</span> whoami</div>
-        <h1>Praveenraj M
+
+        <h1>
+          Praveenraj M
           <span class="role">Senior Frontend Developer — React.js</span>
         </h1>
-        <p class="tagline">Senior Frontend Developer with 6+ years of experience building scalable, high-performance web applications with React.js, TypeScript, and JavaScript (ES6+). Most recently, as Lead Engineer at Altimetrik, I worked on ShopCMS, the content platform powering the Samsung Mobile Shop App across multiple countries, cutting bundle size by 75%, adopting micro-frontends, and delivering internationalized products for global enterprise clients.</p>
+
+        <p class="tagline">
+          Senior Frontend Developer with 6+ years of experience building scalable, high-performance web applications with React.js, TypeScript, and JavaScript (ES6+). Most recently, as Lead Engineer at Altimetrik, I worked on ShopCMS, the content platform powering the Samsung Mobile Shop App across multiple countries, cutting bundle size by 75%, adopting micro-frontends, and delivering internationalized products for global enterprise clients.
+        </p>
+
         <div class="meta-row">
           <span class="pill">📍 Tiruchirapalli, Tamil Nadu, India</span>
           <span class="pill"><a href="mailto:askpravinraj@gmail.com">✉ askpravinraj@gmail.com</a></span>
@@ -763,67 +842,97 @@
       <!-- SKILLS -->
       <section id="skills">
         <h2 class="section-title">skills.json</h2>
+
         <div class="skills-grid">
           <div class="skill-card">
             <div class="key">languages :[</div>
             <div class="tag-wrap">
-              <span class="tag">JavaScript (ES6+)</span><span class="tag">TypeScript</span>
-              <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">SCSS</span>
+              <span class="tag">JavaScript (ES6+)</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">SCSS</span>
             </div>
             <div class="key">]</div>
           </div>
+
           <div class="skill-card">
             <div class="key">frameworks_libraries :[</div>
             <div class="tag-wrap">
-              <span class="tag">React.js</span><span class="tag">React Hooks</span>
-              <span class="tag">jQuery</span><span class="tag">Bootstrap</span>
-              <span class="tag">i18next</span><span class="tag">DataTables</span>
+              <span class="tag">React.js</span>
+              <span class="tag">React Hooks</span>
+              <span class="tag">jQuery</span>
+              <span class="tag">Bootstrap</span>
+              <span class="tag">i18next</span>
+              <span class="tag">DataTables</span>
             </div>
             <div class="key">]</div>
           </div>
+
           <div class="skill-card">
             <div class="key">architecture :[</div>
             <div class="tag-wrap">
-              <span class="tag">Micro-Frontends</span><span class="tag">Component-Based Architecture</span>
-              <span class="tag">State Management</span><span class="tag">Reusable Components</span>
-              <span class="tag">MVC</span><span class="tag">Protected Routes</span><span class="tag">RBAC</span>
+              <span class="tag">Micro-Frontends</span>
+              <span class="tag">Component-Based Architecture</span>
+              <span class="tag">State Management</span>
+              <span class="tag">Reusable Components</span>
+              <span class="tag">MVC</span>
+              <span class="tag">Protected Routes</span>
+              <span class="tag">RBAC</span>
             </div>
             <div class="key">]</div>
           </div>
+
           <div class="skill-card">
             <div class="key">authentication_security :[</div>
             <div class="tag-wrap">
-              <span class="tag">OAuth 2.0</span><span class="tag">OpenID Connect (OIDC)</span>
-              <span class="tag">PKCE</span><span class="tag">JWT</span>
-              <span class="tag">Secure Token Handling</span><span class="tag">Google reCAPTCHA v3</span>
+              <span class="tag">OAuth 2.0</span>
+              <span class="tag">OpenID Connect (OIDC)</span>
+              <span class="tag">PKCE</span>
+              <span class="tag">JWT</span>
+              <span class="tag">Secure Token Handling</span>
+              <span class="tag">Google reCAPTCHA v3</span>
             </div>
             <div class="key">]</div>
           </div>
+
           <div class="skill-card">
             <div class="key">performance_quality :[</div>
             <div class="tag-wrap">
-              <span class="tag">Performance Optimization</span><span class="tag">Bundle Size Reduction</span>
-              <span class="tag">Lazy Loading</span><span class="tag">Code Splitting</span>
-              <span class="tag">Cross-Browser Compatibility</span><span class="tag">Responsive Design</span>
-              <span class="tag">SEO Optimization</span><span class="tag">Code Reviews</span>
+              <span class="tag">Performance Optimization</span>
+              <span class="tag">Bundle Size Reduction</span>
+              <span class="tag">Lazy Loading</span>
+              <span class="tag">Code Splitting</span>
+              <span class="tag">Cross-Browser Compatibility</span>
+              <span class="tag">Responsive Design</span>
+              <span class="tag">SEO Optimization</span>
+              <span class="tag">Code Reviews</span>
             </div>
             <div class="key">]</div>
           </div>
+
           <div class="skill-card">
             <div class="key">tools_devops :[</div>
             <div class="tag-wrap">
-              <span class="tag">Git</span><span class="tag">Webpack</span>
-              <span class="tag">Jenkins (CI/CD)</span><span class="tag">Kibana</span>
-              <span class="tag">REST APIs</span><span class="tag">Jira</span>
-              <span class="tag">Whatfix</span><span class="tag">Doc360</span>
+              <span class="tag">Git</span>
+              <span class="tag">Webpack</span>
+              <span class="tag">Jenkins (CI/CD)</span>
+              <span class="tag">Kibana</span>
+              <span class="tag">REST APIs</span>
+              <span class="tag">Jira</span>
+              <span class="tag">Whatfix</span>
+              <span class="tag">Doc360</span>
             </div>
             <div class="key">]</div>
           </div>
+
           <div class="skill-card">
             <div class="key">practices :[</div>
             <div class="tag-wrap">
-              <span class="tag">Agile/Scrum (Jira)</span><span class="tag">Technical Mentoring</span>
-              <span class="tag">Cross-Functional Collaboration</span><span class="tag">Internationalization (i18n)</span>
+              <span class="tag">Agile/Scrum (Jira)</span>
+              <span class="tag">Technical Mentoring</span>
+              <span class="tag">Cross-Functional Collaboration</span>
+              <span class="tag">Internationalization (i18n)</span>
             </div>
             <div class="key">]</div>
           </div>
@@ -842,13 +951,21 @@
             </div>
             <div class="dates">Aug 2023 — Sep 2026</div>
           </div>
+
           <div class="compression-card" id="compressionCard">
-            <div class="label"><span>ShopCMS · production bundle size</span><span class="result">-75%</span></div>
+            <div class="label">
+              <span>ShopCMS · production bundle size</span>
+              <span class="result">-75%</span>
+            </div>
             <div class="bar-track">
               <div class="bar-fill" id="barFill"></div>
             </div>
-            <div class="bar-labels"><span>6.0 MB</span><span>1.5 MB</span></div>
+            <div class="bar-labels">
+              <span>6.0 MB</span>
+              <span>1.5 MB</span>
+            </div>
           </div>
+
           <div class="job-body">
             <ul>
               <li>Developed and maintained <strong>ShopCMS</strong>, a CMS powering the Samsung Mobile Shop App across multiple countries</li>
@@ -876,12 +993,11 @@
             </div>
             <div class="dates">Nov 2021 — Aug 2023</div>
           </div>
+
           <div class="job-body">
             <ul>
-              <li>Shipped UI improvements and proof-of-concepts for a source-to-pay platform used by manufacturing
-                enterprises</li>
-              <li>Rolled out <strong>Whatfix</strong> and <strong>Doc360</strong> to streamline customer onboarding and
-                cut support load</li>
+              <li>Shipped UI improvements and proof-of-concepts for a source-to-pay platform used by manufacturing enterprises</li>
+              <li>Rolled out <strong>Whatfix</strong> and <strong>Doc360</strong> to streamline customer onboarding and cut support load</li>
               <li>Turned wireframes and design mockups into maintainable frontend code</li>
               <li>Diagnosed and fixed high-priority production issues with fast turnaround</li>
               <li>Built reusable UI components and libraries for consistency across the product</li>
@@ -897,11 +1013,11 @@
             </div>
             <div class="dates">Dec 2019 — Nov 2021</div>
           </div>
+
           <div class="job-body">
             <ul>
               <li>Improved UI and resolved bugs across a large-scale enterprise product built on MVC</li>
-              <li>Migrated <strong>Bootstrap v3 → v4</strong> and <strong>jQuery v1 → v3</strong>, modernizing the
-                codebase</li>
+              <li>Migrated <strong>Bootstrap v3 → v4</strong> and <strong>jQuery v1 → v3</strong>, modernizing the codebase</li>
               <li>Deployed and customized third-party plugins: Redactor, DataTables, Simplebar, Spectrum</li>
               <li>Added Google reCAPTCHA v3 and image lazy-loading to improve security and page speed</li>
               <li>Raised SEO and page-speed scores through frontend optimization</li>
@@ -911,9 +1027,78 @@
         </div>
       </section>
 
+      <!-- PROJECTS -->
+      <section id="projects">
+        <h2 class="section-title">projects.tsx</h2>
+
+        <div class="projects-grid">
+
+          <!-- Snowlytics -->
+          <div class="project-card">
+            <div class="project-top">
+              <span class="project-icon">❄️</span>
+              <span class="project-status">Live Project</span>
+            </div>
+
+            <h3>Snowlytics</h3>
+
+            <p>
+              A sales analytics dashboard integrating Snowflake data with a React frontend.
+              Provides sales insights, key business metrics, category-based analysis,
+              and interactive visualizations through a centralized dashboard.
+            </p>
+
+            <div class="project-tech">
+              <span>React.js</span>
+              <span>JavaScript</span>
+              <span>Snowflake</span>
+              <span>Node.js</span>
+              <span>Express.js</span>
+              <span>REST APIs</span>
+              <span>Charts</span>
+            </div>
+
+            <a href="https://snowlytics.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link">
+              ↗ View Live Project
+            </a>
+          </div>
+
+          <!-- Hey Buddies -->
+          <div class="project-card">
+            <div class="project-top">
+              <span class="project-icon">💬</span>
+              <span class="project-status">Live Project</span>
+            </div>
+
+            <h3>Hey Buddies</h3>
+
+            <p>
+              A real-time chat application supporting group conversations and private messaging.
+              Features WebSocket-based communication, online user tracking, unread message
+              indicators, and @mention functionality for interactive conversations.
+            </p>
+
+            <div class="project-tech">
+              <span>React.js</span>
+              <span>JavaScript</span>
+              <span>Node.js</span>
+              <span>WebSocket</span>
+              <span>Real-time Communication</span>
+              <span>CSS3</span>
+            </div>
+
+            <a href="https://hey-buddies.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link">
+              ↗ View Live Project
+            </a>
+          </div>
+
+        </div>
+      </section>
+
       <!-- EDUCATION -->
       <section id="education">
         <h2 class="section-title">education.md</h2>
+
         <div class="edu-card">
           <div>
             <div class="degree">Bachelor of Technology</div>
@@ -926,12 +1111,13 @@
       <!-- ACHIEVEMENTS -->
       <section id="achievements">
         <h2 class="section-title">achievements.log</h2>
+
         <div class="log-list">
           <div class="log-entry">
             <span class="tag">[AWARD]</span>
-            <span class="msg">Customer Champion Award <span>— won multiple times for accountability and
-                ownership</span></span>
+            <span class="msg">Customer Champion Award <span>— won multiple times for accountability and ownership</span></span>
           </div>
+
           <div class="log-entry">
             <span class="tag">[AWARD]</span>
             <span class="msg">1st Place, Hackathon <span>— 2022</span></span>
@@ -942,16 +1128,28 @@
       <!-- CONTACT -->
       <section id="contact">
         <h2 class="section-title">contact.sh</h2>
+
         <div class="terminal">
-          <div class="terminal-bar"><span></span><span></span><span></span></div>
+          <div class="terminal-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
           <div class="terminal-body">
             <div class="line"><span class="prompt">$</span> <span class="cmd">./contact --email</span></div>
             <div class="line out"><a class="out" href="mailto:askpravinraj@gmail.com">askpravinraj@gmail.com</a></div>
+
             <div class="line"><span class="prompt">$</span> <span class="cmd">./contact --phone</span></div>
             <div class="line out"><a class="out" href="tel:+916379727040">+91 63797-27040</a></div>
+
             <div class="line"><span class="prompt">$</span> <span class="cmd">./contact --linkedin</span></div>
-            <div class="line out"><a class="out" href="https://linkedin.com/in/praveenraj-maran-142246193"
-                target="_blank" rel="noopener">linkedin.com/in/praveenraj-maran-142246193</a></div>
+            <div class="line out">
+              <a class="out" href="https://linkedin.com/in/praveenraj-maran-142246193" target="_blank" rel="noopener noreferrer">
+                linkedin.com/in/praveenraj-maran-142246193
+              </a>
+            </div>
+
             <div class="line"><span class="prompt">$</span> <span class="cmd">echo $STATUS</span></div>
             <div class="line out">open to new opportunities</div>
           </div>
@@ -959,61 +1157,108 @@
       </section>
 
       <footer>Built from source · Praveenraj M © 2026</footer>
+
     </main>
   </div>
 
   <script>
-    // Mobile nav toggle
+    // Mobile navigation toggle
     const toggle = document.getElementById('navToggle');
     const sidebar = document.getElementById('sidebar');
-    if (toggle) {
-      toggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+
+    if (toggle && sidebar) {
+      toggle.addEventListener('click', () => {
+        const isOpen = sidebar.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      });
     }
 
     // File tree click -> scroll + close mobile nav
     const files = document.querySelectorAll('.tree .file');
-    files.forEach(f => {
-      const id = f.dataset.target;
-      f.addEventListener('click', () => {
+
+    files.forEach(file => {
+      const id = file.dataset.target;
+
+      file.addEventListener('click', () => {
         const target = document.getElementById(id);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+
         sidebar.classList.remove('open');
+
+        if (toggle) {
+          toggle.setAttribute('aria-expanded', 'false');
+        }
       });
     });
 
     // Scroll spy
     const crumb = document.getElementById('crumb');
+
     const labelMap = {
-      'home': 'index.tsx', 'skills': 'skills.json',
-      'job-altimetrik': 'experience/altimetrik.tsx', 'job-zumen': 'experience/zumen.tsx', 'job-sparx': 'experience/sparx.tsx',
-      'education': 'education.md', 'achievements': 'achievements.log', 'contact': 'contact.sh'
+      home: 'index.tsx',
+      skills: 'skills.json',
+      'job-altimetrik': 'experience/altimetrik.tsx',
+      'job-zumen': 'experience/zumen.tsx',
+      'job-sparx': 'experience/sparx.tsx',
+      projects: 'projects.tsx',
+      education: 'education.md',
+      achievements: 'achievements.log',
+      contact: 'contact.sh'
     };
-    const observed = Object.keys(labelMap).map(id => document.getElementById(id)).filter(Boolean);
-    const io = new IntersectionObserver((entries) => {
+
+    const observed = Object.keys(labelMap)
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    const io = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.id;
-          files.forEach(f => f.classList.toggle('active', f.dataset.target === id));
-          if (labelMap[id]) crumb.textContent = labelMap[id];
+
+          files.forEach(file => {
+            file.classList.toggle('active', file.dataset.target === id);
+          });
+
+          if (labelMap[id] && crumb) {
+            crumb.textContent = labelMap[id];
+          }
         }
       });
-    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+    }, {
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    });
+
     observed.forEach(el => io.observe(el));
 
     // Bundle size compression animation
     const bar = document.getElementById('barFill');
     const card = document.getElementById('compressionCard');
-    const barIo = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          requestAnimationFrame(() => bar.classList.add('shrunk'));
-          barIo.disconnect();
-        }
+
+    if (bar && card) {
+      const barIo = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            requestAnimationFrame(() => {
+              bar.classList.add('shrunk');
+            });
+
+            barIo.disconnect();
+          }
+        });
+      }, {
+        threshold: 0.4
       });
-    }, { threshold: 0.4 });
-    if (card) barIo.observe(card);
+
+      barIo.observe(card);
+    }
   </script>
 
 </body>
-
 </html>
