@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" type="image/png" href="./assets/letter-p.png">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <style>
     :root {
@@ -188,10 +189,21 @@
       flex-shrink: 0;
     }
 
-    .dot.green { background: var(--accent); }
-    .dot.amber { background: var(--accent-amber); }
-    .dot.red { background: var(--accent-red); }
-    .dot.blue { background: #6ea8d8; }
+    .dot.green {
+      background: var(--accent);
+    }
+
+    .dot.amber {
+      background: var(--accent-amber);
+    }
+
+    .dot.red {
+      background: var(--accent-red);
+    }
+
+    .dot.blue {
+      background: #6ea8d8;
+    }
 
     .sidebar-foot {
       padding: 16px 20px 0;
@@ -379,8 +391,13 @@
       margin-top: 10px;
     }
 
-    .bar-labels span:first-child { color: var(--accent-amber); }
-    .bar-labels span:last-child { color: var(--accent-strong); }
+    .bar-labels span:first-child {
+      color: var(--accent-amber);
+    }
+
+    .bar-labels span:last-child {
+      color: var(--accent-strong);
+    }
 
     /* Skills */
     .skills-grid {
@@ -604,8 +621,13 @@
       font-size: 12px;
     }
 
-    .log-entry .msg { color: var(--text); }
-    .log-entry .msg span { color: var(--text-muted); }
+    .log-entry .msg {
+      color: var(--text);
+    }
+
+    .log-entry .msg span {
+      color: var(--text-muted);
+    }
 
     /* Education */
     .edu-card {
@@ -663,9 +685,17 @@
       display: inline-block;
     }
 
-    .terminal-bar span:nth-child(1) { background: #e8646b; }
-    .terminal-bar span:nth-child(2) { background: #e8a854; }
-    .terminal-bar span:nth-child(3) { background: #7fae8e; }
+    .terminal-bar span:nth-child(1) {
+      background: #e8646b;
+    }
+
+    .terminal-bar span:nth-child(2) {
+      background: #e8a854;
+    }
+
+    .terminal-bar span:nth-child(3) {
+      background: #7fae8e;
+    }
 
     .terminal-body {
       padding: 22px 24px 26px;
@@ -677,8 +707,13 @@
       margin-bottom: 14px;
     }
 
-    .terminal-body .prompt { color: var(--accent); }
-    .terminal-body .cmd { color: var(--text); }
+    .terminal-body .prompt {
+      color: var(--accent);
+    }
+
+    .terminal-body .cmd {
+      color: var(--text);
+    }
 
     .terminal-body .out {
       color: var(--text-muted);
@@ -704,6 +739,7 @@
 
     /* Responsive */
     @media (max-width: 860px) {
+
       .skills-grid,
       .projects-grid {
         grid-template-columns: 1fr;
@@ -792,7 +828,8 @@
 
         <li class="folder">
           <svg viewBox="0 0 16 16" fill="none">
-            <path d="M1 3.5a1 1 0 011-1h4l1.5 2H14a1 1 0 011 1v7a1 1 0 01-1 1H2a1 1 0 01-1-1v-9z" stroke="currentColor" stroke-width="1.2" />
+            <path d="M1 3.5a1 1 0 011-1h4l1.5 2H14a1 1 0 011 1v7a1 1 0 01-1 1H2a1 1 0 01-1-1v-9z" stroke="currentColor"
+              stroke-width="1.2" />
           </svg>
           experience/
         </li>
@@ -829,7 +866,11 @@
         </h1>
 
         <p class="tagline">
-          Senior Frontend Developer with 6+ years of experience building scalable, high-performance web applications with React.js, TypeScript, and JavaScript (ES6+). Most recently, as Lead Engineer at Altimetrik, I worked on ShopCMS, the content platform powering the Samsung Mobile Shop App across multiple countries, cutting bundle size by 75%, adopting micro-frontends, and delivering internationalized products for global enterprise clients.
+          Senior Frontend Developer with 6+ years of experience building scalable, high-performance web applications
+          with React.js, TypeScript, and JavaScript (ES6+). Most recently, as Lead Engineer at Altimetrik, I worked on
+          ShopCMS, the content platform powering the Samsung Mobile Shop App across multiple countries, cutting bundle
+          size by 75%, adopting micro-frontends, and delivering internationalized products for global enterprise
+          clients.
         </p>
 
         <div class="meta-row">
@@ -968,19 +1009,31 @@
 
           <div class="job-body">
             <ul>
-              <li>Developed and maintained <strong>ShopCMS</strong>, a CMS powering the Samsung Mobile Shop App across multiple countries</li>
-              <li>Reduced bundle size by <strong>75% (6MB to 1.5MB)</strong> through targeted performance optimization, improving load times and user experience</li>
-              <li>Adopted <strong>micro-frontend architecture</strong> to enable independent, scalable feature development</li>
-              <li>Implemented <strong>OAuth 2.0</strong> and <strong>OpenID Connect (OIDC)</strong> flows with <strong>PKCE</strong> and secure <strong>JWT</strong> token handling to strengthen login security</li>
+              <li>Developed and maintained <strong>ShopCMS</strong>, a CMS powering the Samsung Mobile Shop App across
+                multiple countries</li>
+              <li>Reduced bundle size by <strong>75% (6MB to 1.5MB)</strong> through targeted performance optimization,
+                improving load times and user experience</li>
+              <li>Adopted <strong>micro-frontend architecture</strong> to enable independent, scalable feature
+                development</li>
+              <li>Implemented <strong>OAuth 2.0</strong> and <strong>OpenID Connect (OIDC)</strong> flows with
+                <strong>PKCE</strong> and secure <strong>JWT</strong> token handling to strengthen login security
+              </li>
               <li>Enforced <strong>RBAC</strong> using Protected Routes to secure application modules</li>
-              <li>Integrated <strong>i18next</strong> for multilingual support, enabling deployment across global markets</li>
-              <li>Established multi-country configuration management for common and region-specific setups, streamlining global deployments</li>
-              <li>Defined component structure, state management strategy, and folder conventions adopted across the engineering team</li>
-              <li>Built reusable, scalable React components using <strong>React Hooks</strong>, improving maintainability and development velocity</li>
-              <li>Integrated REST APIs, participated in <strong>Jenkins</strong> CI/CD deployments, and monitored API failures in <strong>Kibana</strong></li>
+              <li>Integrated <strong>i18next</strong> for multilingual support, enabling deployment across global
+                markets</li>
+              <li>Established multi-country configuration management for common and region-specific setups, streamlining
+                global deployments</li>
+              <li>Defined component structure, state management strategy, and folder conventions adopted across the
+                engineering team</li>
+              <li>Built reusable, scalable React components using <strong>React Hooks</strong>, improving
+                maintainability and development velocity</li>
+              <li>Integrated REST APIs, participated in <strong>Jenkins</strong> CI/CD deployments, and monitored API
+                failures in <strong>Kibana</strong></li>
               <li>Resolved critical production issues under tight timelines, ensuring minimal downtime</li>
-              <li>Mentored junior engineers, conducted code reviews, and ran technical walkthroughs for QA and support teams</li>
-              <li>Worked in an Agile/Scrum team using Jira, collaborating with UX designers and cross-functional teams to turn business requirements into technical solutions</li>
+              <li>Mentored junior engineers, conducted code reviews, and ran technical walkthroughs for QA and support
+                teams</li>
+              <li>Worked in an Agile/Scrum team using Jira, collaborating with UX designers and cross-functional teams
+                to turn business requirements into technical solutions</li>
             </ul>
           </div>
         </div>
@@ -996,8 +1049,10 @@
 
           <div class="job-body">
             <ul>
-              <li>Shipped UI improvements and proof-of-concepts for a source-to-pay platform used by manufacturing enterprises</li>
-              <li>Rolled out <strong>Whatfix</strong> and <strong>Doc360</strong> to streamline customer onboarding and cut support load</li>
+              <li>Shipped UI improvements and proof-of-concepts for a source-to-pay platform used by manufacturing
+                enterprises</li>
+              <li>Rolled out <strong>Whatfix</strong> and <strong>Doc360</strong> to streamline customer onboarding and
+                cut support load</li>
               <li>Turned wireframes and design mockups into maintainable frontend code</li>
               <li>Diagnosed and fixed high-priority production issues with fast turnaround</li>
               <li>Built reusable UI components and libraries for consistency across the product</li>
@@ -1017,11 +1072,13 @@
           <div class="job-body">
             <ul>
               <li>Improved UI and resolved bugs across a large-scale enterprise product built on MVC</li>
-              <li>Migrated <strong>Bootstrap v3 → v4</strong> and <strong>jQuery v1 → v3</strong>, modernizing the codebase</li>
+              <li>Migrated <strong>Bootstrap v3 → v4</strong> and <strong>jQuery v1 → v3</strong>, modernizing the
+                codebase</li>
               <li>Deployed and customized third-party plugins: Redactor, DataTables, Simplebar, Spectrum</li>
               <li>Added Google reCAPTCHA v3 and image lazy-loading to improve security and page speed</li>
               <li>Raised SEO and page-speed scores through frontend optimization</li>
-              <li>Used sprite images and UI plugins such as Owl Carousel and Font Awesome to enhance the visual experience</li>
+              <li>Used sprite images and UI plugins such as Owl Carousel and Font Awesome to enhance the visual
+                experience</li>
             </ul>
           </div>
         </div>
@@ -1040,13 +1097,15 @@
               <span class="project-status">Live Project</span>
             </div>
 
-            <h3>Snowlytics</h3>
+            <h3>Snowpify</h3>
 
             <p>
-              A sales analytics dashboard integrating Snowflake data with a React frontend.
-              Provides sales insights, key business metrics, category-based analysis,
-              and interactive visualizations through a centralized dashboard.
+              A full-stack e-commerce application built with React, Node.js, and Snowflake as the data layer. Customers
+              can browse products, manage a cart, check out with Razorpay, and track their orders, while admins get a
+              dashboard with analytics, inventory management, and delivery tracking.
             </p>
+
+           
 
             <div class="project-tech">
               <span>React.js</span>
@@ -1055,6 +1114,7 @@
               <span>Node.js</span>
               <span>Express.js</span>
               <span>REST APIs</span>
+              <span>Razorpay</span>
               <span>Charts</span>
             </div>
 
@@ -1115,7 +1175,8 @@
         <div class="log-list">
           <div class="log-entry">
             <span class="tag">[AWARD]</span>
-            <span class="msg">Customer Champion Award <span>— won multiple times for accountability and ownership</span></span>
+            <span class="msg">Customer Champion Award <span>— won multiple times for accountability and
+                ownership</span></span>
           </div>
 
           <div class="log-entry">
@@ -1145,7 +1206,8 @@
 
             <div class="line"><span class="prompt">$</span> <span class="cmd">./contact --linkedin</span></div>
             <div class="line out">
-              <a class="out" href="https://linkedin.com/in/praveenraj-maran-142246193" target="_blank" rel="noopener noreferrer">
+              <a class="out" href="https://linkedin.com/in/praveenraj-maran-142246193" target="_blank"
+                rel="noopener noreferrer">
                 linkedin.com/in/praveenraj-maran-142246193
               </a>
             </div>
@@ -1261,4 +1323,5 @@
   </script>
 
 </body>
+
 </html>
